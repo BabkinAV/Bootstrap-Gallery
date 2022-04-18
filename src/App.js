@@ -1,10 +1,14 @@
+import React from 'react';
+import Header from './components/Header';
+import Gallery from './components/Gallery';
 
-import {Button} from 'react-bootstrap'
+
 
 function App() {
   return (
     <div className="App">
-      <Button>Some stuff</Button>
+     <Header/>
+     <Gallery/>
     </div>
   );
 }
