@@ -13,8 +13,6 @@ function App() {
         <Route path="/" element={<Gallery />} />
         <Route path="/about" element={<AboutMe />} />
         <Route path=":itemId" element={<ItemDetails />} />
-        {/* <ItemDetails/> */}
-        {/* <Gallery/> */}
       </Routes>
     </div>
   );

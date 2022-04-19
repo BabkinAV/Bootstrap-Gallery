@@ -1,0 +1,1 @@
+export const SET_OFFCANVAS_OPEN = 'SET_OFFCANVAS_OPEN';
