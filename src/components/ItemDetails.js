@@ -6,13 +6,25 @@ import axios from 'axios';
 const ItemDetails = () => {
   let { itemId } = useParams();
   let navigate = useNavigate();
+  let button = (
+    <Button
+      variant="primary"
+      onClick={() => {
+        navigate('/');
+      }}
+    >
+      Назад
+    </Button>
+  );
   const [itemData, setItemData] = useState({});
   const [isLoaderShown, setIsLoaderShown] = useState(false);
+  const [error, setIsError] = useState(false);
 
   useEffect(() => {
     const apiUrl = `https://jsonplaceholder.typicode.com/photos/${itemId}`;
     setIsLoaderShown(true);
-
+    try {
+    } catch (error) {}
     axios
       .get(apiUrl)
       .then((resp) => {
@@ -23,6 +35,12 @@ const ItemDetails = () => {
         setTimeout(() => {
           setIsLoaderShown(false);
         }, 500);
+      })
+      .catch(() => {
+        setTimeout(() => {
+          setIsLoaderShown(false);
+          setIsError(true);
+        }, 500);
       });
   }, [itemId]);
 
@@ -32,7 +50,7 @@ const ItemDetails = () => {
         <Row>
           {isLoaderShown ? (
             <Spinner animation="border" variant="primary" className="mt-3" />
-          ) : (
+          ) : !error ? (
             <>
               <Col xs={12} md={6}>
                 <div className="singleGalleryItem__image">
@@ -54,17 +72,12 @@ const ItemDetails = () => {
                     <span className="fw-bold">Link:</span>{' '}
                     <a href={itemData.url}>{itemData.url}</a>
                   </p>
-                  <Button
-                    variant="primary"
-                    onClick={() => {
-                      navigate(-1);
-                    }}
-                  >
-                    Назад
-                  </Button>
+                  {button}
                 </div>
               </Col>
             </>
+          ) : (
+            <><Col><p>Данные не найдены</p>{button}</Col></> 
           )}
         </Row>
       </Container>
