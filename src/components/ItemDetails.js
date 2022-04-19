@@ -12,13 +12,18 @@ const ItemDetails = () => {
   useEffect(() => {
     const apiUrl = `https://jsonplaceholder.typicode.com/photos/${itemId}`;
     setIsLoaderShown(true);
-    axios.get(apiUrl).then((resp) => {
-      const imageData = resp.data;
-      setItemData(imageData);
-    }).then(()=> {
-      setIsLoaderShown(false)
-    });
 
+    axios
+      .get(apiUrl)
+      .then((resp) => {
+        const imageData = resp.data;
+        setItemData(imageData);
+      })
+      .then(() => {
+        setTimeout(() => {
+          setIsLoaderShown(false);
+        }, 500);
+      });
   }, [itemId]);
 
   return (
