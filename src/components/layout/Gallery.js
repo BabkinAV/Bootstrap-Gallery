@@ -1,8 +1,8 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import GalleryItem from './GalleryItem';
-import data from '../data';
-import categories from '../data_categories';
+import GalleryItem from '../GalleryItem';
+import data from '../../data';
+import categories from '../../data_categories';
 
 const Gallery = () => {
   return (

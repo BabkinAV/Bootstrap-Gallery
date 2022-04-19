@@ -1,6 +1,6 @@
 import React from 'react';
 import { Col, Container, Figure, Row } from 'react-bootstrap';
-import avatarImg from '../assets/images/ava_01_big.jpg';
+import avatarImg from '../../assets/images/ava_01_big.jpg';
 
 const AboutMe = () => {
   return (

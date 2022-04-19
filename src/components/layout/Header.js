@@ -1,7 +1,7 @@
 import React from 'react';
 import { Navbar, Container, Offcanvas, Nav, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import avatarImg from '../assets/images/ava_01.jpg';
+import avatarImg from '../../assets/images/ava_01.jpg';
 
 const Header = () => {
   return (

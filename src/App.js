@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './components/Header';
-import Gallery from './components/Gallery';
+import Header from './components/layout/Header';
+import Gallery from './components/layout/Gallery';
 import ItemDetails from './components/ItemDetails';
-import AboutMe from './components/AboutMe';
+import AboutMe from './components/layout/AboutMe';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
