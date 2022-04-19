@@ -1,3 +1,3 @@
-const categories = ['Category 1', 'Category 2', 'Category 3', 'Category 4'];
+const categories = ['Категория 1', 'Категория 2', 'Категория 3', 'Категория 4'];
 
 export default categories;

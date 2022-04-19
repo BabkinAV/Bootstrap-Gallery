@@ -1,10 +1,11 @@
 import React from 'react';
 import { Navbar, Container, Offcanvas, Nav, Image } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import avatarImg from '../assets/images/ava_01.jpg';
 
 const Header = () => {
   return (
-    <Navbar expand={false} className="header">
+    <Navbar expand={false} className="header" >
       <Container fluid>
         <Navbar.Toggle aria-controls="offcanvasNavbar" />
         <Navbar.Brand href="#">Bootstrap gallery</Navbar.Brand>
@@ -24,8 +25,8 @@ const Header = () => {
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav className="justify-content-end flex-grow-1 pe-3">
-              <Nav.Link href="#action1">Галерея</Nav.Link>
-              <Nav.Link href="#action2">Обо мне</Nav.Link>
+              <Nav.Link as={Link} to="/">Галерея</Nav.Link>
+              <Nav.Link as={Link} to="/about">Обо мне</Nav.Link>
             </Nav>
           </Offcanvas.Body>
         </Navbar.Offcanvas>

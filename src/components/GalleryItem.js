@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Figure } from 'react-bootstrap';
 import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
-const GalleryItem = ({ url }) => {
+const GalleryItem = ({ url, id }) => {
   const [isButtonShown, setIsButtonShown] = useState(false);
+  let navigate = useNavigate();
 
   return (
     <div
@@ -14,7 +16,7 @@ const GalleryItem = ({ url }) => {
       <Figure>
         <Figure.Image src={url} />
       </Figure>
-      {isButtonShown && <Button variant="primary">Подробнее</Button>}
+      {isButtonShown && <Button variant="primary" onClick={() => navigate(`/${id}`)}>Подробнее</Button>}
     </div>
   );
 };

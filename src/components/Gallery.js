@@ -16,7 +16,7 @@ const Gallery = () => {
               {data.slice(index * 6, index * 6 + 6).map((el) => {
                 return (
                   <Col xs={12} md={6} lg={2} key={el.id} className="mb-5">
-                    <GalleryItem url={el.url} />
+                    <GalleryItem url={el.url} id={el.id}/>
                   </Col>
                 );
               })}

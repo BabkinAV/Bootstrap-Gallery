@@ -1,3 +1,19 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'header';
-@import 'gallery'
+@import 'gallery';
+
+
+
+
+
+// The below styles are to eliminate layout shift on offcanvas open
+
+body {
+  width: 100%;
+  width: 100vw;
+  overflow-x: hidden;
+}
+
+body {
+  padding-right: 0 !important;
+}
