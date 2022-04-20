@@ -1,4 +1,6 @@
 import { all, put, takeEvery, call, delay } from 'redux-saga/effects';
+import * as api from './api/getImages';
+
 import {
   FETCH_SINGLE_ITEM,
   SET_SINGLE_ITEM,
@@ -6,7 +8,6 @@ import {
   SET_GALLERY,
 } from './types';
 import { setShowLoader, setShowError } from './uiActions';
-import axios from 'axios';
 
 export function* sagaItemWatcher() {
   yield takeEvery(FETCH_SINGLE_ITEM, sagaItemWorker);
@@ -19,7 +20,7 @@ function* sagaGalleryWorker() {
   try {
     yield put(setShowError(false));
     yield put(setShowLoader(true));
-    const payload = yield call(getGallery);
+    const payload = yield call(api.getGallery);
     yield put({ type: SET_GALLERY, payload });
     yield delay(500);
     yield put(setShowLoader(false));
@@ -33,7 +34,7 @@ function* sagaItemWorker({ payload: itemId }) {
   try {
     yield put(setShowError(false));
     yield put(setShowLoader(true));
-    const payload = yield call(getSingleItem, itemId);
+    const payload = yield call(api.getSingleItem, itemId);
     yield put({ type: SET_SINGLE_ITEM, payload });
     yield delay(500);
     yield put(setShowLoader(false));
@@ -45,20 +46,4 @@ function* sagaItemWorker({ payload: itemId }) {
 
 export default function* rootSaga() {
   yield all([ sagaItemWatcher(), sagaGalleryWatcher()]);
-}
-
-function getSingleItem(itemId) {
-  return axios
-    .get(`https://jsonplaceholder.typicode.com/photos/${itemId}`)
-    .then((response) => {
-      return response.data;
-    });
-}
-
-function getGallery() {
-  return axios
-    .get(`http://jsonplaceholder.typicode.com/photos?_start=0&_limit=24`)
-    .then((response) => {
-      return response.data;
-    });
 }
