@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import GalleryItem from '../GalleryItem';
@@ -6,9 +6,14 @@ import categories from '../../data_categories';
 import { fetchGallery } from '../../redux/uiActions';
 
 const Gallery = ({ fetchGallery, galleryData, loaderShown, errorShown }) => {
+
+
+  const memoFetchGallery = useCallback(() => {fetchGallery()}, [fetchGallery])
+
   useEffect(() => {
-    fetchGallery();
-  }, [fetchGallery]);
+    memoFetchGallery();
+  }, [memoFetchGallery]);
+
   return (
     <section className="gallery">
       <Container className="pt-5">
