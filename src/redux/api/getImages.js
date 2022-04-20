@@ -10,7 +10,7 @@ export const getSingleItem = (itemId) => {
 
 export const getGallery = () => {
   return axios
-    .get(`http://jsonplaceholder.typicode.com/photos?_start=0&_limit=24`)
+    .get(`https://jsonplaceholder.typicode.com/photos?_start=0&_limit=24`)
     .then((response) => {
       return response.data;
     });
