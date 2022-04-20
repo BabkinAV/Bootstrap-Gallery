@@ -1,35 +1,52 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col, Spinner } from 'react-bootstrap';
 import GalleryItem from '../GalleryItem';
-import data from '../../data';
 import categories from '../../data_categories';
 import { fetchGallery } from '../../redux/uiActions';
 
-const Gallery = ({ fetchGallery }) => {
+const Gallery = ({ fetchGallery, galleryData, loaderShown, errorShown }) => {
   useEffect(() => {
     fetchGallery();
   }, [fetchGallery]);
   return (
     <section className="gallery">
       <Container className="pt-5">
-        {categories.map((catEl, index) => {
-          return (
-            <Row key={index}>
-              <h3 className="mb-5">{catEl}</h3>
-              {data.slice(index * 6, index * 6 + 6).map((el) => {
-                return (
-                  <Col xs={12} md={6} lg={2} key={el.id} className="mb-5">
-                    <GalleryItem url={el.url} id={el.id} />
-                  </Col>
-                );
-              })}
-            </Row>
-          );
-        })}
+        {loaderShown ? (
+          <Spinner animation="border" variant="primary" className="mt-3" />
+        ) : !errorShown ? (
+          categories.map((catEl, index) => {
+            return (
+              <Row key={index}>
+                <h3 className="mb-5">{catEl}</h3>
+                {galleryData.slice(index * 6, index * 6 + 6).map((el) => {
+                  return (
+                    <Col xs={12} md={6} lg={2} key={el.id} className="mb-5">
+                      <GalleryItem url={el.url} id={el.id} />
+                    </Col>
+                  );
+                })}
+              </Row>
+            );
+          })
+        ) : (
+          <Row>
+            <Col>
+              <p>Данные не найдены</p>
+            </Col>
+          </Row>
+        )}
       </Container>
     </section>
   );
 };
 
-export default connect(null, { fetchGallery })(Gallery);
+const mapStateToProps = (state) => {
+  return {
+    galleryData: state.galleryData,
+    loaderShown: state.loaderShown,
+    errorShown: state.errorShown,
+  };
+};
+
+export default connect(mapStateToProps, { fetchGallery })(Gallery);

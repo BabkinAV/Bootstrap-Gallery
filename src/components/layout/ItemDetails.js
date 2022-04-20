@@ -37,7 +37,7 @@ const ItemDetails = ({
         <Row>
           {loaderShown ? (
             <Spinner animation="border" variant="primary" className="mt-3" />
-          ) : !errorShown? (
+          ) : !errorShown ? (
             <>
               <Col xs={12} md={6}>
                 <div className="singleGalleryItem__image">

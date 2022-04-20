@@ -8,10 +8,6 @@ import {
 import { setShowLoader, setShowError } from './uiActions';
 import axios from 'axios';
 
-export function* helloSaga() {
-  console.log('Hello Sagas!');
-}
-
 export function* sagaItemWatcher() {
   yield takeEvery(FETCH_SINGLE_ITEM, sagaItemWorker);
 }
@@ -20,7 +16,17 @@ export function* sagaGalleryWatcher() {
 }
 
 function* sagaGalleryWorker() {
-  console.log('works!');
+  try {
+    yield put(setShowError(false));
+    yield put(setShowLoader(true));
+    const payload = yield call(getGallery);
+    yield put({ type: SET_GALLERY, payload });
+    yield delay(500);
+    yield put(setShowLoader(false));
+  } catch (e) {
+    yield put(setShowLoader(false));
+    yield put(setShowError(true));
+  }
 }
 
 function* sagaItemWorker({ payload: itemId }) {
@@ -28,9 +34,8 @@ function* sagaItemWorker({ payload: itemId }) {
     yield put(setShowError(false));
     yield put(setShowLoader(true));
     const payload = yield call(getSingleItem, itemId);
-    yield delay(500);
-
     yield put({ type: SET_SINGLE_ITEM, payload });
+    yield delay(500);
     yield put(setShowLoader(false));
   } catch (e) {
     yield put(setShowLoader(false));
@@ -39,7 +44,7 @@ function* sagaItemWorker({ payload: itemId }) {
 }
 
 export default function* rootSaga() {
-  yield all([helloSaga(), sagaItemWatcher(), sagaGalleryWatcher()]);
+  yield all([ sagaItemWatcher(), sagaGalleryWatcher()]);
 }
 
 function getSingleItem(itemId) {
