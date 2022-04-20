@@ -11,3 +11,9 @@ Simple React Bootstrap Gallery made with Redux Saga
 2. [React-Bootstrap](https://react-bootstrap.github.io/https://react-bootstrap.github.io/)
 3. [Redux](https://react-redux.js.org/)
 4. [Redux Saga](https://redux-saga.js.org)
+
+## Running the project locally
+From the repo:
+1. Clone the project locally
+2. Run `npm install` in your bash\command line
+3. Run `npm start` in your bash\command line
