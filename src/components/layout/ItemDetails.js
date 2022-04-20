@@ -1,10 +1,15 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Button, Col, Container, Figure, Row, Spinner } from 'react-bootstrap';
 import { fetchSingleItem } from '../../redux/uiActions';
 
-const ItemDetails = ({singleItem, showSingleItemLoader, fetchSingleItem, showSingleItemError}) => {
+const ItemDetails = ({
+  singleItemData,
+  loaderShown,
+  fetchSingleItem,
+  errorShown,
+}) => {
   let { itemId } = useParams();
   let navigate = useNavigate();
   let button = (
@@ -17,47 +22,54 @@ const ItemDetails = ({singleItem, showSingleItemLoader, fetchSingleItem, showSin
       Назад
     </Button>
   );
-  useEffect(() => {
+
+  const memoFetchSingleItem = useCallback(() => {
     fetchSingleItem(itemId);
-    
   }, [fetchSingleItem, itemId]);
 
-
+  useEffect(() => {
+    memoFetchSingleItem();
+  }, [memoFetchSingleItem]);
 
   return (
     <section className="singleGalleryItem mt-5">
       <Container>
         <Row>
-          {showSingleItemLoader ? (
+          {loaderShown ? (
             <Spinner animation="border" variant="primary" className="mt-3" />
-          ) : !showSingleItemError ? (
+          ) : !errorShown? (
             <>
               <Col xs={12} md={6}>
                 <div className="singleGalleryItem__image">
                   <Figure>
-                    <Figure.Image src={singleItem.url} />
+                    <Figure.Image src={singleItemData.url} />
                   </Figure>
                 </div>
               </Col>
               <Col xs={12} md={6}>
                 <div className="singleGalleryItem__info">
                   <p>
-                    <span className="fw-bold">Id:</span> {singleItem.id}
+                    <span className="fw-bold">Id:</span> {singleItemData.id}
                   </p>
                   <p>
                     <span className="fw-bold">Title: </span>
-                    {singleItem.title}
+                    {singleItemData.title}
                   </p>
                   <p>
                     <span className="fw-bold">Link:</span>{' '}
-                    <a href={singleItem.url}>{singleItem.url}</a>
+                    <a href={singleItemData.url}>{singleItemData.url}</a>
                   </p>
                   {button}
                 </div>
               </Col>
             </>
           ) : (
-            <><Col><p>Данные не найдены</p>{button}</Col></> 
+            <>
+              <Col>
+                <p>Данные не найдены</p>
+                {button}
+              </Col>
+            </>
           )}
         </Row>
       </Container>
@@ -67,11 +79,10 @@ const ItemDetails = ({singleItem, showSingleItemLoader, fetchSingleItem, showSin
 
 const mapStateToProps = (state) => {
   return {
-    singleItem: state.singleItem,
-    showSingleItemLoader: state.showSingleItemLoader,
-    showSingleItemError: state.showSingleItemError
-    
-  }
-}
+    singleItemData: state.singleItemData,
+    loaderShown: state.loaderShown,
+    errorShown: state.errorShown,
+  };
+};
 
-export default connect(mapStateToProps, {fetchSingleItem})(ItemDetails);
+export default connect(mapStateToProps, { fetchSingleItem })(ItemDetails);

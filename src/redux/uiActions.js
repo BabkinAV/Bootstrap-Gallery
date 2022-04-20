@@ -1,4 +1,4 @@
-import { SET_OFFCANVAS_OPEN, FETCH_SINGLE_ITEM, SET_SHOW_ERROR, SET_SHOW_LOADER} from "./types";
+import { SET_OFFCANVAS_OPEN, FETCH_SINGLE_ITEM, SET_SHOW_ERROR, SET_SHOW_LOADER, FETCH_GALLERY } from "./types";
 
 export const setOffCanvasOpen = (isOffcanvasOpen) => {
   return {
@@ -12,6 +12,12 @@ export function fetchSingleItem(itemId) {
   return {
     type: FETCH_SINGLE_ITEM,
     payload: itemId
+  }
+}
+export function fetchGallery() {
+
+  return {
+    type: FETCH_GALLERY,
   }
 }
 
