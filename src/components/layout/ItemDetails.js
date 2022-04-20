@@ -34,6 +34,7 @@ const ItemDetails = ({
   return (
     <section className="singleGalleryItem mt-5">
       <Container>
+        <h1 className="text-center mb-5">Подробности о картинке</h1>
         <Row>
           {loaderShown ? (
             <Spinner animation="border" variant="primary" className="mt-3" />

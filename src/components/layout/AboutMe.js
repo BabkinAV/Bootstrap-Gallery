@@ -6,6 +6,7 @@ const AboutMe = () => {
   return (
     <section className="About mt-5">
       <Container>
+        <h1 className="text-center mb-5">Обо мне</h1>
         <Row>
           <Col xs={12} md={6}>
             <div className="About__image">
