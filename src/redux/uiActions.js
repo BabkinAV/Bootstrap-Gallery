@@ -1,4 +1,4 @@
-import { SET_OFFCANVAS_OPEN, FETCH_SINGLE_ITEM, SHOW_SINGLE_ITEM_LOADER, SHOW_SINGLE_ITEM_ERROR} from "./types";
+import { SET_OFFCANVAS_OPEN, FETCH_SINGLE_ITEM, SET_SHOW_ERROR, SET_SHOW_LOADER} from "./types";
 
 export const setOffCanvasOpen = (isOffcanvasOpen) => {
   return {
@@ -15,16 +15,16 @@ export function fetchSingleItem(itemId) {
   }
 }
 
-export function showSingleItemLoader(isShowSingleItemLoader) {
+export function setShowLoader(isLoaderShown) {
   return {
-    type: SHOW_SINGLE_ITEM_LOADER,
-    payload: isShowSingleItemLoader
+    type: SET_SHOW_LOADER,
+    payload: isLoaderShown,
   }
 }
-export function showSingleItemError(isShowSingleItemError) {
+export function setShowError(isErrorShown) {
   return {
-    type: SHOW_SINGLE_ITEM_ERROR,
-    payload: isShowSingleItemError
+    type: SET_SHOW_ERROR,
+    payload: isErrorShown
   }
 }
 
